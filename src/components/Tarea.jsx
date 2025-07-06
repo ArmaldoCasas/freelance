@@ -56,17 +56,7 @@ function Tarea() {
   };
 
   return (
- <div
-  style={{
-    border: '1px solid #ccc',
-    marginBottom: '20px',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', // sombra
-    maxWidth: '1600px', //lo alarga
-    margin: '0 auto 20px auto'    // lo centra
-  }}
->
+    <div style={{ border: '1px solid #ccc', padding: '10px' }}>
       <h2>Tareas</h2>
       <Form
         addOrUpdateItem={addOrUpdateTarea}
