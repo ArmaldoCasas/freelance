@@ -32,8 +32,8 @@ function Cliente() {
 
     if (clienteToEdit) {
       // Modo editar
-      setClientes(clientes.map(c =>
-        c.id === clienteToEdit.id ? { ...c, value } : c
+      setClientes(clientes.map(cliente =>
+        cliente.id === clienteToEdit.id ? { ...cliente, value } : cliente
       ));
       setClienteToEdit(null);
     } else {
@@ -42,14 +42,14 @@ function Cliente() {
       setClientes([...clientes, newCliente]);
     }
   };
-
+  //Elimina un cliente
   const deleteCliente = (id) => {
     if (window.confirm("¿Eliminar este cliente?")) {
       setClientes(clientes.filter(c => c.id !== id));
     }
   };
 
-  // Elimina un cliente
+  // Edita un cliente
   const editCliente = (cliente) => {
     setClienteToEdit(cliente);
   };
