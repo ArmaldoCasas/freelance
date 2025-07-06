@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
-function Form({ addOrUpdateItem, itemToEdit }) {
+function Form({ addOrUpdateItem, itemToEdit, clientes = [] }) {
   const [inputValue, setInputValue] = useState("");
-
-  // Si hay un item para editar, carga su valor en el input si no queda en blanco(Defualt)
+  const [selectedClienteId, setSelectedClienteId] = useState("");
+// Si hay un item para editar, carga su valor en el input si no queda en blanco(Defualt)
   useEffect(() => {
     if (itemToEdit) {
       setInputValue(itemToEdit.value);
+      setSelectedClienteId(itemToEdit.clienteId || "");
     } else {
       setInputValue("");
+      setSelectedClienteId("");
     }
   }, [itemToEdit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (inputValue.trim()) {
-      addOrUpdateItem(inputValue);
+      if (clientes.length > 0) {
+        addOrUpdateItem(inputValue, Number(selectedClienteId));
+      } else {
+        addOrUpdateItem(inputValue);
+      }
+
       setInputValue("");
+      setSelectedClienteId("");
     }
   };
 
@@ -26,11 +35,22 @@ function Form({ addOrUpdateItem, itemToEdit }) {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Ingrese un Cliente/valor"
+        placeholder="Nombre"
       />
-      <button type="submit">
-        {itemToEdit ? 'Actualizar' : 'Agregar'}
-      </button>
+      {clientes.length > 0 && (
+        <select
+          value={selectedClienteId}
+          onChange={(e) => setSelectedClienteId(Number(e.target.value))}
+        >
+          <option value="">Seleccione un cliente</option>
+          {clientes.map(c => (
+            <option key={c.id} value={c.id}>
+              {c.value}
+            </option>
+          ))}
+        </select>
+      )}
+      <button type="submit">{itemToEdit ? "Actualizar" : "Agregar"}</button>
     </form>
   );
 }

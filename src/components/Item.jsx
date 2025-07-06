@@ -1,11 +1,26 @@
 import React from 'react';
 
-function Item({ item, deleteItem, editItem }) {
+function Item({ item, deleteItem, editItem, clientes = [] }) {
+  const cliente = clientes.find(c => c.id === item.clienteId);
+
   return (
-    <li>
+    // Muestra Nombre de Item
+    <li style={{ marginBottom: '5px' }}>
       {item.value}
-      <button onClick={() => editItem(item)}>Editar</button>
-      <button onClick={() => deleteItem(item.id)}>Eliminar</button>
+  {clientes.length > 0 &&(
+    cliente ? (
+      //Si hay clientes asociados a la tarea muestra el nombre con color purpura si no muestra sin Cliente de color rojo 
+      <span style={{ marginLeft: '10px', color: 'purple' }}>
+      Cliente: {cliente.value}
+      </span>
+    ) : (
+      <span style={{ marginLeft: '10px', color: 'red' }}>
+      Sin cliente
+      </span>
+  )//Abajo estan los botones de Editar y Eliminar 
+  )} 
+    <button onClick={() => editItem(item)} style={{ marginLeft: '10px' }}>Editar</button>
+    <button onClick={() => deleteItem(item.id)} style={{ marginLeft: '5px' }}>Eliminar</button>
     </li>
   );
 }
