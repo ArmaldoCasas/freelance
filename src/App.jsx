@@ -4,7 +4,7 @@ import Tarea from './components/Tarea';
 
 function App() {
   return (
-    <div>
+    <div style={{ padding: '20px' }}>
       <h1>Control de Clientes y Tareas</h1>
       <Cliente />
       <Tarea />
