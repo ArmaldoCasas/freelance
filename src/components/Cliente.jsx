@@ -16,14 +16,13 @@ function Cliente() {
   useEffect(() => {
     localStorage.setItem('clientes', JSON.stringify(clientes));
   }, [clientes]);
-
+  
   const addOrUpdateCliente = (value) => {
     // Validación 1: que tenga al menos 3 caracteres, value.trim elimina espacios sobrantes
     if (value.trim().length < 3 || value.trim().length > 15) {
       alert("El texto debe tener entre 3 y 15 caracteres.");
       return;
     }
-
     // La variable que se crea acá hace que el formulario no se le puedan incluir símbolos y solo admita lo que dentro
     const validFormat = /^[a-zA-Z0-9 ]+$/;
     if (!validFormat.test(value)) {
@@ -43,21 +42,21 @@ function Cliente() {
       setClientes([...clientes, newCliente]);
     }
   };
-
-  // Elimina un cliente
+  //Elimina un cliente
   const deleteCliente = (id) => {
-    if (window.confirm("¿Estás seguro de que quieres eliminar este cliente?")) {
-      setClientes(clientes.filter(cliente => cliente.id !== id));
+    if (window.confirm("¿Eliminar este cliente?")) {
+      setClientes(clientes.filter(c => c.id !== id));
     }
   };
 
-  // Prepara un cliente para ser editado
+  // Edita un cliente
   const editCliente = (cliente) => {
     setClienteToEdit(cliente);
   };
 
+  // Prepara un cliente para ser editado
   return (
-    <div style={{ border: '1px solid #ccc', marginBottom: '20px', padding: '10px' }}>
+    <div style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '20px' }}>
       <h2>Clientes</h2>
       <Form addOrUpdateItem={addOrUpdateCliente} itemToEdit={clienteToEdit} />
       <List items={clientes} deleteItem={deleteCliente} editItem={editCliente} />
