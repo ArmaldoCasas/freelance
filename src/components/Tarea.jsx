@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Form from './Form';
-import List from './List';
+import Form from './Form'; 
+import List from './List'; 
 
 function Tarea() {
   // Estado principal: la lista de tareas
@@ -15,17 +15,17 @@ function Tarea() {
   });
 
   const [tareaToEdit, setTareaToEdit] = useState();
-
+   // Estado para la tarea que se está editando
   useEffect(() => {
     localStorage.setItem('tareas', JSON.stringify(tareas));
   }, [tareas]);
-
+  // Guarda en Local Storage cada vez que tareas cambia
   const addOrUpdateTarea = (value, clienteId, tiempoEstimado, tiempoReal, valorHora) => {
     if (!clienteId) {
       alert("Selecciona un cliente.");
       return;
     }
-
+// La variable que se crea acá hace que el formulario no se le puedan incluir símbolos y solo admita lo que dentro
     const validFormat = /^[a-zA-Z0-9 ]+$/;
     if (!validFormat.test(value)) {
       alert("El nombre solo puede contener letras, números y espacios.");
@@ -33,11 +33,11 @@ function Tarea() {
     }
 
     const tareaBase = {
-      value,
-      clienteId,
-      tiempoEstimado,
-      tiempoReal,
-      valorHora
+      value,           
+      clienteId,       
+      tiempoEstimado,  
+      tiempoReal,       
+      valorHora         
     };
 
     if (tareaToEdit) {
@@ -47,10 +47,16 @@ function Tarea() {
       ));
       setTareaToEdit(null);
     } else {
+      
+      // Modo agregar
+
       const newTarea = { id: Date.now(), ...tareaBase };
       setTareas([...tareas, newTarea]);
     }
   };
+
+
+  // Elimina una tarea
 
   const deleteTarea = (id) => {
     if (window.confirm("¿Eliminar esta tarea?")) {
@@ -63,12 +69,13 @@ function Tarea() {
   };
 
   return (
-    <div>
+
+    <div >
       <Form
-        tipo="tarea"
+        tipo={"tarea"}
         addOrUpdateItem={addOrUpdateTarea}
         itemToEdit={tareaToEdit}
-        clientes={clientes}
+        clientes={clientes} 
       />
       <List
         items={tareas}

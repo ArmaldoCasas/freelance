@@ -54,10 +54,10 @@ function Cliente() {
     setClienteToEdit(cliente);
   };
 
-  // Prepara un cliente para ser editado
   return (
-    <div>
-      <Form tipo="cliente" addOrUpdateItem={addOrUpdateCliente} itemToEdit={clienteToEdit} />
+ <div>
+
+      <Form tipo={"cliente"} addOrUpdateItem={addOrUpdateCliente} itemToEdit={clienteToEdit} />
       <List items={clientes} deleteItem={deleteCliente} editItem={editCliente} />
     </div>
   );
