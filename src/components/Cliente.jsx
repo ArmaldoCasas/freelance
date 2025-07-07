@@ -16,17 +16,17 @@ function Cliente() {
   useEffect(() => {
     localStorage.setItem('clientes', JSON.stringify(clientes));
   }, [clientes]);
-  
+
   const addOrUpdateCliente = (value) => {
     // Validación 1: que tenga al menos 3 caracteres, value.trim elimina espacios sobrantes
     if (value.trim().length < 3 || value.trim().length > 15) {
       alert("El texto debe tener entre 3 y 15 caracteres.");
       return;
     }
-    // La variable que se crea acá hace que el formulario no se le puedan incluir símbolos y solo admita lo que dentro
+
     const validFormat = /^[a-zA-Z0-9 ]+$/;
     if (!validFormat.test(value)) {
-      alert("El texto solo puede contener letras, números y espacios.");
+      alert("Solo se permiten letras, números y espacios.");
       return;
     }
 
@@ -42,10 +42,10 @@ function Cliente() {
       setClientes([...clientes, newCliente]);
     }
   };
-  //Elimina un cliente
+
   const deleteCliente = (id) => {
     if (window.confirm("¿Eliminar este cliente?")) {
-      setClientes(clientes.filter(c => c.id !== id));
+      setClientes(clientes.filter(cliente => cliente.id !== id));
     }
   };
 

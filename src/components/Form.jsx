@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
+
   const [inputValue, setInputValue] = useState("");
   const [clienteId, setClienteId] = useState("");
   const [tiempoEstimado, setTiempoEstimado] = useState("");
@@ -50,6 +51,7 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
           onChange={(e) => setInputValue(e.target.value)}
         />
       </div>
+
 
       {tipo === "tarea" && clientes.length > 0 && (
         <div className="mb-2">

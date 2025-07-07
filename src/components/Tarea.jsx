@@ -8,12 +8,12 @@ function Tarea() {
     const data = localStorage.getItem('tareas');
     return data ? JSON.parse(data) : [];
   });
-  // Estado De los Clientes
+
   const [clientes, setClientes] = useState(() => {
     const data = localStorage.getItem('clientes');
     return data ? JSON.parse(data) : [];
   });
-  // Guarda en Local Storage cada vez que tareas cambia
+
   const [tareaToEdit, setTareaToEdit] = useState();
    // Estado para la tarea que se está editando
   useEffect(() => {
@@ -32,7 +32,6 @@ function Tarea() {
       return;
     }
 
-
     const tareaBase = {
       value,           
       clienteId,       
@@ -48,24 +47,29 @@ function Tarea() {
       ));
       setTareaToEdit(null);
     } else {
+      
       // Modo agregar
+
       const newTarea = { id: Date.now(), ...tareaBase };
       setTareas([...tareas, newTarea]);
     }
   };
 
+
   // Elimina una tarea
+
   const deleteTarea = (id) => {
     if (window.confirm("¿Eliminar esta tarea?")) {
       setTareas(tareas.filter(t => t.id !== id));
     }
   };
-  // Prepara una tarea para ser editada
+
   const editTarea = (tarea) => {
     setTareaToEdit(tarea);
   };
 
   return (
+
     <div >
       <Form
         tipo={"tarea"}
