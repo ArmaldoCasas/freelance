@@ -1,56 +1,107 @@
 import React, { useState, useEffect } from 'react';
 
-function Form({ addOrUpdateItem, itemToEdit, clientes = [] }) {
+function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
   const [inputValue, setInputValue] = useState("");
-  const [selectedClienteId, setSelectedClienteId] = useState("");
-// Si hay un item para editar, carga su valor en el input si no queda en blanco(Defualt)
+  const [clienteId, setClienteId] = useState("");
+  const [tiempoEstimado, setTiempoEstimado] = useState("");
+  const [tiempoReal, setTiempoReal] = useState("");
+  const [valorHora, setValorHora] = useState("");
+
   useEffect(() => {
     if (itemToEdit) {
-      setInputValue(itemToEdit.value);
-      setSelectedClienteId(itemToEdit.clienteId || "");
+      setInputValue(itemToEdit.value || "");
+      setClienteId(itemToEdit.clienteId || "");
+      setTiempoEstimado(itemToEdit.tiempoEstimado || "");
+      setTiempoReal(itemToEdit.tiempoReal || "");
+      setValorHora(itemToEdit.valorHora || "");
     } else {
       setInputValue("");
-      setSelectedClienteId("");
+      setClienteId("");
+      setTiempoEstimado("");
+      setTiempoReal("");
+      setValorHora("");
     }
   }, [itemToEdit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (inputValue.trim()) {
-      if (clientes.length > 0) {
-        addOrUpdateItem(inputValue, Number(selectedClienteId));
+      if (tipo === 'tarea') {
+        addOrUpdateItem(inputValue, clienteId, tiempoEstimado, tiempoReal, valorHora);
       } else {
         addOrUpdateItem(inputValue);
       }
-
       setInputValue("");
-      setSelectedClienteId("");
+      setClienteId("");
+      setTiempoEstimado("");
+      setTiempoReal("");
+      setValorHora("");
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Nombre"
-      />
-      {clientes.length > 0 && (
-        <select
-          value={selectedClienteId}
-          onChange={(e) => setSelectedClienteId(Number(e.target.value))}
-        >
-          <option value="">Seleccione un cliente</option>
-          {clientes.map(c => (
-            <option key={c.id} value={c.id}>
-              {c.value}
-            </option>
-          ))}
-        </select>
+      <div className="mb-2">
+        <input
+          type="text"
+          className="form-control"
+          placeholder={tipo === 'cliente' ? "Nombre del cliente" : "Nombre de la tarea"}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+      </div>
+
+      {tipo === "tarea" && clientes.length > 0 && (
+        <div className="mb-2">
+          <select
+            className="form-select"
+            value={clienteId}
+            onChange={(e) => setClienteId(e.target.value)}
+          >
+            <option value="">Seleccionar el cliente</option>
+            {clientes.map((cliente) => (
+              <option key={cliente.id} value={cliente.id}>
+                {cliente.value}
+              </option>
+            ))}
+          </select>
+        </div>
       )}
-      <button type="submit" class="btn btn-outline-secondary">{itemToEdit ? "Actualizar" : "Agregar"}</button>
+
+      {tipo === "tarea" && (
+        <>
+          <div className="mb-2">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Tiempo estimado(horas)"
+              value={tiempoEstimado}
+              onChange={(e) => setTiempoEstimado(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-2">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Tiempo real(horas)"
+              value={tiempoReal}
+              onChange={(e) => setTiempoReal(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Valor por hora"
+              value={valorHora}
+              onChange={(e) => setValorHora(e.target.value)}
+            />
+          </div>
+        </>
+      )}
+       <button type="submit" class="btn btn-outline-secondary">{itemToEdit ? "Actualizar" : "Agregar"}</button>
     </form>
   );
 }
