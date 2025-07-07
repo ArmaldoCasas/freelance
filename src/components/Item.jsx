@@ -10,7 +10,7 @@ function Item({ item, deleteItem, editItem, clientes = [] }) {
   {clientes.length > 0 &&(
     cliente ? (
       //Si hay clientes asociados a la tarea muestra el nombre con color purpura si no muestra sin Cliente de color rojo 
-      <span style={{ marginLeft: '10px', color: 'purple' }}>
+      <span style={{ marginLeft: '10px', color: 'green' }}>
       Cliente: {cliente.value}
       </span>
     ) : (
@@ -19,8 +19,8 @@ function Item({ item, deleteItem, editItem, clientes = [] }) {
       </span>
   )//Abajo estan los botones de Editar y Eliminar 
   )} 
-    <button onClick={() => editItem(item)} style={{ marginLeft: '10px' }}>Editar</button>
-    <button onClick={() => deleteItem(item.id)} style={{ marginLeft: '5px' }}>Eliminar</button>
+    <button type="button" class="btn btn-outline-primary" onClick={() => editItem(item)} style={{ marginLeft: '10px' }}>Editar</button>
+    <button type="button" class="btn btn-outline-danger" onClick={() => deleteItem(item.id)} style={{ marginLeft: '5px' }}>Eliminar</button>
     </li>
   );
 }

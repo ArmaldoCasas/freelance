@@ -50,7 +50,7 @@ function Form({ addOrUpdateItem, itemToEdit, clientes = [] }) {
           ))}
         </select>
       )}
-      <button type="submit">{itemToEdit ? "Actualizar" : "Agregar"}</button>
+      <button type="submit" class="btn btn-outline-secondary">{itemToEdit ? "Actualizar" : "Agregar"}</button>
     </form>
   );
 }
