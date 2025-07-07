@@ -1,11 +1,14 @@
 import React from 'react';
+import { useState } from 'react';
 import Cliente from './components/Cliente';
 import Tarea from './components/Tarea';
 import DolarAPI from './components/DolarApi';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BarChart from './components/BarChart';
 
 
 function App() {
+  const [tareas, setTareas] = useState([]);
 return (
   <>
   <header>
@@ -36,7 +39,7 @@ return (
           <div className="card shadow">
             <div className="card-body">
               <h3 className="card-title mb-3">Tareas</h3>
-              <Tarea />
+              <Tarea tareas={tareas} setTareas={setTareas}/>
             </div>
           </div>
         </div>
@@ -47,6 +50,16 @@ return (
             <div className="card-body">
               <h3 className="card-title mb-3">Dolar Hoy</h3>
               <DolarAPI />
+            </div>
+          </div>
+        </div>
+
+        {/* Card grafico*/}
+        <div className="col-md-12">
+          <div className="card shadow">
+            <div className="card-body">
+              <h3 className="card-title mb-3">Reportes</h3>
+              <BarChart tareas={tareas}/>
             </div>
           </div>
         </div>
