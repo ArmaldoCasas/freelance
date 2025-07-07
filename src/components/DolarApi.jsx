@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function DolarAPI() {
   const [dolarValue, setDolarValue] = useState(null);
@@ -15,20 +16,13 @@ function DolarAPI() {
   }, []);
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "20px",
-        borderRadius: "8px",
-        marginBottom: "20px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        maxWidth: "400px",
-        margin: "0 auto 20px auto"
-      }}
-    >
-      <h2>Valor del Dólar (CLP)</h2>
+    <div>
       {dolarValue ? (
-        <p>1 USD = ${dolarValue} CLP</p>
+      <div className="col-md-6">
+        <div className="p-3 mb-2 bg-primary text-white">
+          <p>1 USD = ${dolarValue} CLP </p>
+        </div>
+      </div>
       ) : (
         <p>cargando valor del dólar...</p>
       )}
