@@ -8,14 +8,17 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
   const [tiempoReal, setTiempoReal] = useState("");
   const [valorHora, setValorHora] = useState("");
 
+  //Edicion de item 
   useEffect(() => {
     if (itemToEdit) {
+      //Si hay item para editar, precarga sus valores en el formulario
       setInputValue(itemToEdit.value || "");
       setClienteId(itemToEdit.clienteId || "");
       setTiempoEstimado(itemToEdit.tiempoEstimado || "");
       setTiempoReal(itemToEdit.tiempoReal || "");
       setValorHora(itemToEdit.valorHora || "");
     } else {
+      //Si no hay item para editar, vacía los campos para agregar un item nuevo
       setInputValue("");
       setClienteId("");
       setTiempoEstimado("");
@@ -24,14 +27,18 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
     }
   }, [itemToEdit]);
 
+  //Envio de formulario
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
+      //Si el formulario es tipo 'tarea', envia todos los campos
       if (tipo === 'tarea') {
         addOrUpdateItem(inputValue, clienteId, tiempoEstimado, tiempoReal, valorHora);
       } else {
+        //Si no, envia solo el nombre
         addOrUpdateItem(inputValue);
       }
+      //Vacía los campos del formulario despues del envio
       setInputValue("");
       setClienteId("");
       setTiempoEstimado("");
@@ -42,6 +49,7 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/*Nombre de cliente o tarea*/}
       <div className="mb-2">
         <input
           type="text"
@@ -52,7 +60,7 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
         />
       </div>
 
-
+      {/* Solo se muestra si tipo es 'tarea' y hay clientes disponibles */}
       {tipo === "tarea" && clientes.length > 0 && (
         <div className="mb-2">
           <select
@@ -70,8 +78,10 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
         </div>
       )}
 
+      {/* Campos adicionales para tareas */}
       {tipo === "tarea" && (
         <>
+          {/* Tiempo estimado */}
           <div className="mb-2">
             <input
               type="number"
@@ -81,7 +91,7 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
               onChange={(e) => setTiempoEstimado(e.target.value)}
             />
           </div>
-
+          {/* Tiempo real */}
           <div className="mb-2">
             <input
               type="number"
@@ -91,7 +101,7 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
               onChange={(e) => setTiempoReal(e.target.value)}
             />
           </div>
-
+          {/* Valor por hora */}
           <div className="mb-3">
             <input
               type="number"
@@ -103,9 +113,11 @@ function Form({ tipo, addOrUpdateItem, itemToEdit, clientes = [] }) {
           </div>
         </>
       )}
+       {/* Botón que cambia dependiendo de si se está editando o agregando */}
        <button type="submit" class="btn btn-outline-secondary">{itemToEdit ? "Actualizar" : "Agregar"}</button>
     </form>
   );
 }
 
 export default Form;
+

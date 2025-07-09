@@ -1,12 +1,39 @@
-# React + Vite
+***Freelance***
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta aplicación está pensada para freelancers que trabajan con múltiples clientes y 
+necesitan organizar su tiempo de manera eficiente. Debe permitir registrar tareas 
+diarias, asociarlas a un cliente, indicar el tiempo estimado y real dedicado, así como 
+el valor económico por hora o proyecto. La app debe mostrar reportes semanales o 
+mensuales con gráficos que permitan visualizar el rendimiento y facturación 
+estimada. Se debe poder marcar tareas como completadas, editar o eliminarlas 
+fácilmente. La app debe tener un dashboard principal, formularios intuitivos y 
+componentes reutilizables. Como valor agregado obligatorio, deben integrar una API 
+pública que entregue información útil al tipo de cliente (por ejemplo, algo que 
+complemente la experiencia sin ser sugerido aquí). Todo el sistema debe funcionar 
+en Local Storage, asegurando que la información persista entre sesiones. 
 
-Currently, two official plugins are available:
+***Tecnologias utilizadas***
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-React
+-Vite
+-Bootstrap
+-Chart.js
+-Mindicador API
 
-## Expanding the ESLint configuration
+***Instalacion***
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project
+Clona el repositorio:
+  
+git clone https://github.com/ArmaldoCasas/freelance.git
+
+Accede al proyecto:
+
+cd freelance
+
+Instala las dependencias:
+
+npm install
+
+Ejecuta la aplicacion:
+
+npm run dev
